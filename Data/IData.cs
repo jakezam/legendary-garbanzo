@@ -10,5 +10,6 @@ namespace legendary_garbanzo.Data
         IEnumerable<User> GetAllUsers();
         User GetUserById(int userId);
         void CreateUser(User user);
+        void UpdateUser(User user);
     }
 }

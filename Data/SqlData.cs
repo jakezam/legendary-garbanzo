@@ -35,5 +35,10 @@ namespace legendary_garbanzo.Data
 
             _context.Users.Add(user);
         }
+
+        public void UpdateUser(User user)
+        {
+            // Do Nothing
+        }
     }
 }

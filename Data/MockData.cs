@@ -48,5 +48,10 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateUser(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -58,5 +58,21 @@ namespace legendary_garbanzo.Controllers
 
             return CreatedAtRoute(nameof(GetUserById), new {UserId = userRead.UserId}, userRead);
         }
+        
+        // PUT api/users/{id}
+        [HttpPut("{id}")]
+        public ActionResult<UserUpdate> UpdateUser(int id, UserUpdate userUpdate)
+        {
+            var userModel = _data.GetUserById(id);
+            if (userModel == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(userUpdate, userModel);
+            _data.UpdateUser(userModel);
+            _data.SaveChanges();
+            return NoContent();
+        }
     }
 } 

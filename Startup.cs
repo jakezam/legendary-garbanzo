@@ -28,6 +28,16 @@ namespace legendary_garbanzo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Allow Cors
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
+            
             // Add inployd-dev DbContext
             services.AddDbContext<DataContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("inployd-dev-connection")));
@@ -49,6 +59,8 @@ namespace legendary_garbanzo
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseCors();
 
             app.UseHttpsRedirection();
 

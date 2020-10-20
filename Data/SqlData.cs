@@ -30,7 +30,7 @@ namespace legendary_garbanzo.Data
 
         public void CreateUser(User user)
         {
-            if(user == null)
+            if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
             _context.Users.Add(user);
@@ -39,6 +39,40 @@ namespace legendary_garbanzo.Data
         public void UpdateUser(User user)
         {
             // Do Nothing
+        }
+
+        public IEnumerable<Provider> GetAllProviders(string category)
+        {
+            if (category == null)
+            {
+                return _context.Providers.ToList();
+            }
+            else
+            {
+                var providers = _context.Providers.ToList();
+                var specific = from provider in providers
+                               where provider.Category == category
+                               select provider;
+                return specific;
+            }
+        }
+
+        public Provider GetProviderById(int providerId)
+        {
+            return _context.Providers.FirstOrDefault(u => u.ProviderId == providerId);
+        }
+
+        public void CreateProvider(Provider provider)
+        {
+            if (provider == null)
+                throw new ArgumentNullException(nameof(provider));
+
+            _context.Providers.Add(provider);
+        }
+
+        public void UpdateProvider(Provider provider)
+        {
+            throw new NotImplementedException();
         }
     }
 }

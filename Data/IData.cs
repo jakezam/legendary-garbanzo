@@ -11,5 +11,10 @@ namespace legendary_garbanzo.Data
         User GetUserById(int userId);
         void CreateUser(User user);
         void UpdateUser(User user);
+
+        IEnumerable<Provider> GetAllProviders(string category);
+        Provider GetProviderById(int providerId);
+        void CreateProvider(Provider provider);
+        void UpdateProvider(Provider provider);
     }
 }

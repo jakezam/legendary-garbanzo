@@ -7,9 +7,10 @@ namespace legendary_garbanzo.Data
     {
         public DataContext(DbContextOptions<DataContext> opt) : base(opt)
         {
-            
+
         }
-        
+
         public DbSet<User> Users { get; set; }
+        public DbSet<Provider> Providers { get; set; }
     }
 }

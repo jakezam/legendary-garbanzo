@@ -39,8 +39,13 @@ namespace legendary_garbanzo.Data
         {
             return new User
             {
-                UserId = 00001, FirstName = "test", LastName = "test", DateOfBirth = new DateTime(), Gender = "test",
-                State = "test", CreatedDate = new DateTime()
+                UserId = 00001,
+                FirstName = "test",
+                LastName = "test",
+                DateOfBirth = new DateTime(),
+                Gender = "test",
+                State = "test",
+                CreatedDate = new DateTime()
             };
         }
 
@@ -50,6 +55,26 @@ namespace legendary_garbanzo.Data
         }
 
         public void UpdateUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Provider> GetAllProviders(string category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Provider GetProviderById(int providerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateProvider(Provider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateProvider(Provider provider)
         {
             throw new NotImplementedException();
         }

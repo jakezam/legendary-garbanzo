@@ -4,6 +4,7 @@ namespace legendary_garbanzo.DTOs
 {
     public class ProviderRead
     {
+        public int Id { get; set; }
         public int ProviderId { get; set; }
         public string Company { get; set; }
         public string Category { get; set; }

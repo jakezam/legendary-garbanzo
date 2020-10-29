@@ -12,5 +12,6 @@ namespace legendary_garbanzo.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Provider> Providers { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }

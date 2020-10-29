@@ -6,6 +6,9 @@ namespace legendary_garbanzo.Models
     public class Provider
     {
         [Key]
+        public int Id { get; set; }
+
+        [Required]
         public int ProviderId { get; set; }
 
         [Required]

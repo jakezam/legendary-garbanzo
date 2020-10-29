@@ -78,5 +78,23 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Review> GetReviews(string userId, string receivedReviews)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Review GetReviewById(int reviewId)
+        {
+            throw new NotImplementedException();
+        }
+        public void CreateReview(Review review)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdateReview(Review review)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

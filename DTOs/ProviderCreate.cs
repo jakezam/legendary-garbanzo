@@ -6,6 +6,9 @@ namespace legendary_garbanzo.DTOs
     public class ProviderCreate
     {
         [Required]
+        public int ProviderId { get; set; }
+
+        [Required]
         [MaxLength(255)]
         public string Company { get; set; }
 

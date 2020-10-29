@@ -74,5 +74,44 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Review> GetReviews(string userId, string receivedReviews)
+        {
+            if (userId == null)
+            {
+                return _context.Reviews.ToList();
+            }
+            else
+            {
+                var id = Int16.Parse(userId);
+                var reviews = _context.Reviews.ToList();
+                var specific = from review in reviews
+                               where review.UserId == id
+                               select review;
+
+                if (receivedReviews == "true")
+                {
+                    specific = from review in reviews
+                               where review.ReceivingUserId == id
+                               select review;
+                }
+                return specific;
+            }
+        }
+        public Review GetReviewById(int reviewId)
+        {
+            return _context.Reviews.FirstOrDefault(u => u.ReviewId == reviewId);
+        }
+        public void CreateReview(Review review)
+        {
+            if (review == null)
+                throw new ArgumentNullException(nameof(review));
+
+            _context.Reviews.Add(review);
+        }
+        public void UpdateReview(Review review)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

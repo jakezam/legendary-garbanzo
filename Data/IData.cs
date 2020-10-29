@@ -16,5 +16,10 @@ namespace legendary_garbanzo.Data
         Provider GetProviderById(int providerId);
         void CreateProvider(Provider provider);
         void UpdateProvider(Provider provider);
+
+        IEnumerable<Review> GetReviews(string userId, string receivedReviews);
+        Review GetReviewById(int reviewId);
+        void CreateReview(Review review);
+        void UpdateReview(Review review);
     }
 }

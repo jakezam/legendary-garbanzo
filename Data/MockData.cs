@@ -96,5 +96,22 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Job> GetJobs(string userId)
+        {
+            throw new NotImplementedException();
+        }
+        public Job GetJobById(int jobId)
+        {
+            throw new NotImplementedException();
+        }
+        public void CreateJob(Job job)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdateJob(Job job)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

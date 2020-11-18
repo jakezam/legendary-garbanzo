@@ -113,5 +113,37 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Job> GetJobs(string userId)
+        {
+            if (userId == null)
+            {
+                return _context.Jobs.ToList();
+            }
+            else
+            {
+                int id = Int16.Parse(userId);
+                var jobs = _context.Jobs.ToList();
+                var specific = from job in jobs
+                               where job.UserId == id
+                               select job;
+                return specific;
+            }
+        }
+        public Job GetJobById(int jobId)
+        {
+            return _context.Jobs.FirstOrDefault(u => u.Id == jobId);
+        }
+        public void CreateJob(Job job)
+        {
+            if (job == null)
+                throw new ArgumentNullException(nameof(job));
+
+            _context.Jobs.Add(job);
+        }
+        public void UpdateJob(Job job)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

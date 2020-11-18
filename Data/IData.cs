@@ -21,5 +21,10 @@ namespace legendary_garbanzo.Data
         Review GetReviewById(int reviewId);
         void CreateReview(Review review);
         void UpdateReview(Review review);
+
+        IEnumerable<Job> GetJobs(string userId);
+        Job GetJobById(int jobId);
+        void CreateJob(Job job);
+        void UpdateJob(Job job);
     }
 }

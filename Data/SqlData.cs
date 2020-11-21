@@ -18,6 +18,7 @@ namespace legendary_garbanzo.Data
             return _context.SaveChanges() >= 0;
         }
 
+        #region Users
         public IEnumerable<User> GetAllUsers()
         {
             return _context.Users.ToList();
@@ -40,7 +41,16 @@ namespace legendary_garbanzo.Data
         {
             // Do Nothing
         }
+        #endregion
 
+        #region SubCategories
+        public List<SubCategory> GetSubCategoriesById(int providerId)
+        {
+            return _context.SubCategories.Where(sc => sc.ProviderId == providerId).ToList();
+        }
+        #endregion
+
+        #region Providers
         public IEnumerable<Provider> GetAllProviders(string category)
         {
             if (category == null)
@@ -74,7 +84,9 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Reviews
         public IEnumerable<Review> GetReviews(string userId, string receivedReviews)
         {
             if (userId == null)
@@ -113,7 +125,9 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Jobs
         public IEnumerable<Job> GetJobs(string userId)
         {
             if (userId == null)
@@ -145,5 +159,6 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

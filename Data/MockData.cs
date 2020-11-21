@@ -59,6 +59,12 @@ namespace legendary_garbanzo.Data
             throw new NotImplementedException();
         }
 
+        public List<SubCategory> GetSubCategoriesById(int providerId)
+        {
+            throw new NotImplementedException();
+        }
+
+
         public IEnumerable<Provider> GetAllProviders(string category)
         {
             throw new NotImplementedException();

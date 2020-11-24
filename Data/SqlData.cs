@@ -82,7 +82,9 @@ namespace legendary_garbanzo.Data
 
         public void UpdateProvider(Provider provider)
         {
-            throw new NotImplementedException();
+            if (provider == null)
+                throw new ArgumentNullException(nameof(provider));
+            _context.Providers.Update(provider);
         }
         #endregion
 

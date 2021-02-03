@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
+#pragma warning disable 1591 /*XML Doc String Warning*/
+
 namespace legendary_garbanzo.DTOs
 {
     public class ProviderUpdate
@@ -13,12 +15,16 @@ namespace legendary_garbanzo.DTOs
         [MaxLength(64)]
         public string Category { get; set; }
 
+        [Required]
         public string Website { get; set; }
 
+        [Required]
         public int Rating { get; set; }
 
+        [Required]
         public string ExpertiseLevel { get; set; }
 
+        [Required]
         [MaxLength(255)]
         public string About { get; set;  }
 

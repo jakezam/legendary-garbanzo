@@ -2,7 +2,7 @@
 
 namespace legendary_garbanzo.DTOs
 {
-    public class SubCategoryUpdate
+    public class CategoryCreate
     {
         [Required]
         public int UserId { get; set; }

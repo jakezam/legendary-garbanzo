@@ -10,8 +10,8 @@ using legendary_garbanzo.Data;
 namespace legendary_garbanzo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201028193821_v2020.10.28_Migration")]
-    partial class v20201028_Migration
+    [Migration("20210203034601_v0.1.3")]
+    partial class v013
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,16 +19,100 @@ namespace legendary_garbanzo.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0-rc.1.20451.13");
+                .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("legendary_garbanzo.Models.Provider", b =>
+            modelBuilder.Entity("legendary_garbanzo.Models.Category", b =>
+                {
+                    b.Property<int>("ProviderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("FlatRate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HourlyRate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderCategory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProviderId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("legendary_garbanzo.Models.Job", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<DateTime>("BeginDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ConsumerStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsProviding")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("JobAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("JobModified")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("ProviderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Jobs");
+                });
+
+            modelBuilder.Entity("legendary_garbanzo.Models.Provider", b =>
+                {
+                    b.Property<Guid>("ProviderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("About")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("AptNum")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
                     b.Property<string>("Category")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
@@ -38,16 +122,33 @@ namespace legendary_garbanzo.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("ProviderId")
-                        .HasColumnType("int");
+                    b.Property<string>("ExpertiseLevel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
                     b.Property<string>("Website")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Zip")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
+
+                    b.HasKey("ProviderId");
 
                     b.ToTable("Providers");
                 });
@@ -96,10 +197,9 @@ namespace legendary_garbanzo.Migrations
 
             modelBuilder.Entity("legendary_garbanzo.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -113,6 +213,7 @@ namespace legendary_garbanzo.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
@@ -122,6 +223,7 @@ namespace legendary_garbanzo.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("State")
+                        .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 

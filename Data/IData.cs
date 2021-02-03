@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using legendary_garbanzo.Models;
+
+#pragma warning disable 1591 /*XML Doc String Warning*/
 
 namespace legendary_garbanzo.Data
 {
@@ -10,16 +13,16 @@ namespace legendary_garbanzo.Data
         
         // Users //
         IEnumerable<User> GetAllUsers();
-        User GetUserById(int userId);
+        User GetUserById(Guid userId);
         void CreateUser(User user);
         void UpdateUser(User user);
         
-        // SubCategories //
-        List<SubCategory> GetSubCategoriesById(int providerId);
+        // Categories //
+        List<Category> GetCategoriesById(int providerId);
 
         // Providers //
         IEnumerable<Provider> GetAllProviders(string category);
-        Provider GetProviderById(int providerId);
+        Provider GetProviderById(Guid providerId);
         void CreateProvider(Provider provider);
         void UpdateProvider(Provider provider);
 

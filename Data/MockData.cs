@@ -13,40 +13,12 @@ namespace legendary_garbanzo.Data
 
         public IEnumerable<User> GetAllUsers()
         {
-            var users = new List<User>
-            {
-                new User
-                {
-                    UserId = 00001, FirstName = "Bill", LastName = "test", DateOfBirth = new DateTime(), Gender = "test",
-                    State = "test", CreatedDate = new DateTime()
-                },
-                new User
-                {
-                    UserId = 00002, FirstName = "Sam", LastName = "test", DateOfBirth = new DateTime(), Gender = "test",
-                    State = "test", CreatedDate = new DateTime()
-                },
-                new User
-                {
-                    UserId = 00003, FirstName = "Tom", LastName = "test", DateOfBirth = new DateTime(), Gender = "test",
-                    State = "test", CreatedDate = new DateTime()
-                },
-            };
-
-            return users;
+            throw new NotImplementedException();
         }
 
-        public User GetUserById(int userId)
+        public User GetUserById(Guid userId)
         {
-            return new User
-            {
-                UserId = 00001,
-                FirstName = "test",
-                LastName = "test",
-                DateOfBirth = new DateTime(),
-                Gender = "test",
-                State = "test",
-                CreatedDate = new DateTime()
-            };
+            throw new NotImplementedException();
         }
 
         public void CreateUser(User user)
@@ -59,18 +31,17 @@ namespace legendary_garbanzo.Data
             throw new NotImplementedException();
         }
 
-        public List<SubCategory> GetSubCategoriesById(int providerId)
+        public List<Category> GetCategoriesById(int providerId)
         {
             throw new NotImplementedException();
         }
-
 
         public IEnumerable<Provider> GetAllProviders(string category)
         {
             throw new NotImplementedException();
         }
 
-        public Provider GetProviderById(int providerId)
+        public Provider GetProviderById(Guid providerId)
         {
             throw new NotImplementedException();
         }
@@ -94,10 +65,12 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+
         public void CreateReview(Review review)
         {
             throw new NotImplementedException();
         }
+
         public void UpdateReview(Review review)
         {
             throw new NotImplementedException();
@@ -107,14 +80,17 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+
         public Job GetJobById(int jobId)
         {
             throw new NotImplementedException();
         }
+
         public void CreateJob(Job job)
         {
             throw new NotImplementedException();
         }
+
         public void UpdateJob(Job job)
         {
             throw new NotImplementedException();

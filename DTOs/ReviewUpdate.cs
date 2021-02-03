@@ -17,6 +17,6 @@ namespace legendary_garbanzo.DTOs
         public string Description { get; set; }
 
         [Required]
-        public Boolean WouldRecommend { get; set; }
+        public bool WouldRecommend { get; set; }
     }
 }

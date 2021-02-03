@@ -1,15 +1,15 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
+#pragma warning disable 1591 /*XML Doc String Warning*/
+
 namespace legendary_garbanzo.Models
 {
     public class Provider
     {
         [Key]
-        public int Id { get; set; }
-
         [Required]
-        public int ProviderId { get; set; }
+        public Guid ProviderId { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -19,12 +19,16 @@ namespace legendary_garbanzo.Models
         [MaxLength(64)]
         public string Category { get; set; }
 
+        [Required]
         public string Website { get; set; }
 
+        [Required]
         public int Rating { get; set; }
 
+        [Required]
         public string ExpertiseLevel { get; set; }
 
+        [Required]
         [MaxLength(255)]
         public string About { get; set; }
 
@@ -47,5 +51,8 @@ namespace legendary_garbanzo.Models
         [Required]
         [MaxLength(16)]
         public string Zip { get; set; }
+        
+        [Required]
+        public DateTime CreatedDate { get; set; }
     }
 }

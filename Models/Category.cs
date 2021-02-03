@@ -3,18 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace legendary_garbanzo.Models
 {
-    public class SubCategory
+    public class Category
     {
         [Key]
         public int ProviderId { get; set; }
 
         [Required]
-        public string Category { get; set; }
+        public string ProviderCategory { get; set; }
 
         [Required]
         public string HourlyRate { get; set; }
 
         [Required]
-        public string FlateRate { get; set; }
+        public string FlatRate { get; set; }
     }
 }

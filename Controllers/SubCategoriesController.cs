@@ -22,12 +22,12 @@ namespace legendary_garbanzo.Controllers
         
         // GET api/subcategories/{id}
         [HttpGet("{providerId}", Name=nameof(GetSubCategoriesById))]
-        public ActionResult<SubCategoryRead> GetSubCategoriesById(int providerId)
+        public ActionResult<CategoryRead> GetSubCategoriesById(int providerId)
         {
-            var subCategories = _data.GetSubCategoriesById(providerId);
+            var subCategories = _data.GetCategoriesById(providerId);
             
             if (subCategories != null)
-                return Ok(_mapper.Map<SubCategoryRead>(subCategories));
+                return Ok(_mapper.Map<CategoryRead>(subCategories));
             
             return NotFound();
         }

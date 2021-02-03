@@ -7,6 +7,8 @@ using legendary_garbanzo.DTOs;
 using legendary_garbanzo.Models;
 using Microsoft.AspNetCore.Mvc;
 
+#pragma warning disable 1591 /*XML Doc String Warning*/
+
 namespace legendary_garbanzo.Controllers
 {
     [Route("api/[controller]")]
@@ -36,7 +38,7 @@ namespace legendary_garbanzo.Controllers
 
         // GET api/providers/{id}
         [HttpGet("{providerId}", Name = nameof(GetProviderById))]
-        public ActionResult<ProviderRead> GetProviderById(int providerId)
+        public ActionResult<ProviderRead> GetProviderById(Guid providerId)
         {
             var provider = _data.GetProviderById(providerId);
 
@@ -60,19 +62,23 @@ namespace legendary_garbanzo.Controllers
         }
 
         // PUT api/providers/{id}
+        /// <remarks>
+        ///     Note that to update a provider you MUST provide all the provider properties. This
+        ///     may change in a future version of the application.
+        /// </remarks>
         [HttpPut("{id}")]
-        public ActionResult<ProviderUpdate> UpdateProvider(int id, ProviderUpdate providerUpdate)
+        public ActionResult<ProviderUpdate> UpdateProvider(Guid id, ProviderUpdate providerUpdate)
         {
-            var providerModel = _data.GetProviderById(id);
-            if (providerModel == null)
+            var oldProvider = _data.GetProviderById(id);
+            if (oldProvider == null)
             {
                 return NotFound();
             }
 
-            _mapper.Map(providerUpdate, providerModel);
-            _data.UpdateProvider(providerModel);
+            _mapper.Map(providerUpdate, oldProvider);
+            _data.UpdateProvider(oldProvider);
             _data.SaveChanges();
-            return NoContent();
+            return Ok();
         }
     }
 }

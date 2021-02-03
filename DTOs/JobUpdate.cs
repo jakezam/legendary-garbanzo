@@ -12,8 +12,8 @@ namespace legendary_garbanzo.DTOs
         public int ProviderId { get; set; }
 
         [Required]
-        public DateTime beginDate { get; set; }
-        public DateTime endDate { get; set; }
+        public DateTime BeginDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -23,6 +23,7 @@ namespace legendary_garbanzo.DTOs
         [MaxLength(1000)]
         public string Description { get; set; }
 
+        [Required]
         public string ConsumerStatus { get; set; }
 
         [Required]

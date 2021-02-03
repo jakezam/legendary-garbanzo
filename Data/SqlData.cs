@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using legendary_garbanzo.Models;
 
+#pragma warning disable 1591 /*XML Doc String Warning*/
+
 namespace legendary_garbanzo.Data
 {
     public class SqlData : IData
@@ -24,7 +26,7 @@ namespace legendary_garbanzo.Data
             return _context.Users.ToList();
         }
 
-        public User GetUserById(int userId)
+        public User GetUserById(Guid userId)
         {
             return _context.Users.FirstOrDefault(u => u.UserId == userId);
         }
@@ -39,14 +41,18 @@ namespace legendary_garbanzo.Data
 
         public void UpdateUser(User user)
         {
-            // Do Nothing
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            _context.Users.Update(user);
+            
         }
         #endregion
 
-        #region SubCategories
-        public List<SubCategory> GetSubCategoriesById(int providerId)
+        #region Categories
+        public List<Category> GetCategoriesById(int providerId)
         {
-            return _context.SubCategories.Where(sc => sc.ProviderId == providerId).ToList();
+            return _context.Categories.Where(sc => sc.ProviderId == providerId).ToList();
         }
         #endregion
 
@@ -67,7 +73,7 @@ namespace legendary_garbanzo.Data
             }
         }
 
-        public Provider GetProviderById(int providerId)
+        public Provider GetProviderById(Guid providerId)
         {
             return _context.Providers.FirstOrDefault(u => u.ProviderId == providerId);
         }
@@ -84,6 +90,7 @@ namespace legendary_garbanzo.Data
         {
             if (provider == null)
                 throw new ArgumentNullException(nameof(provider));
+            
             _context.Providers.Update(provider);
         }
         #endregion

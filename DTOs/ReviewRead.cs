@@ -11,7 +11,7 @@ namespace legendary_garbanzo.DTOs
         public int Rating { get; set; }
         public string Header { get; set; }
         public string Description { get; set; }
-        public Boolean WouldRecommend { get; set; }
+        public bool WouldRecommend { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

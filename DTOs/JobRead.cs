@@ -7,8 +7,8 @@ namespace legendary_garbanzo.DTOs
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ProviderId { get; set; }
-        public DateTime beginDate { get; set; }
-        public DateTime endDate { get; set; }
+        public DateTime BeginDate { get; set; }
+        public DateTime EndDate { get; set; }
         public string JobTitle { get; set; }
         public string Description { get; set; }
         public string ConsumerStatus { get; set; }

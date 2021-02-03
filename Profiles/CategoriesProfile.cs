@@ -2,6 +2,8 @@
 using legendary_garbanzo.DTOs;
 using legendary_garbanzo.Models;
 
+#pragma warning disable 1591 /*XML Doc String Warning*/
+
 namespace legendary_garbanzo.Profiles
 {
     public class CategoriesProfile : Profile

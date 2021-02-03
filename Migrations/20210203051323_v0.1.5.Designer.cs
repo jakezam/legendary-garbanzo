@@ -10,8 +10,8 @@ using legendary_garbanzo.Data;
 namespace legendary_garbanzo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210203034601_v0.1.3")]
-    partial class v013
+    [Migration("20210203051323_v0.1.5")]
+    partial class v015
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,10 @@ namespace legendary_garbanzo.Migrations
 
             modelBuilder.Entity("legendary_garbanzo.Models.Category", b =>
                 {
-                    b.Property<int>("ProviderId")
+                    b.Property<Guid>("ProviderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CategoryNumber")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -40,7 +43,7 @@ namespace legendary_garbanzo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProviderId");
+                    b.HasKey("ProviderId", "CategoryNumber");
 
                     b.ToTable("Categories");
                 });
@@ -121,6 +124,9 @@ namespace legendary_garbanzo.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ExpertiseLevel")
                         .IsRequired()

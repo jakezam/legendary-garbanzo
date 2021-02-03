@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace legendary_garbanzo.Migrations
 {
-    public partial class v013 : Migration
+    public partial class v015 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,8 @@ namespace legendary_garbanzo.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    ProviderId = table.Column<int>(type: "int", nullable: false)
+                    ProviderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoryNumber = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProviderCategory = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HourlyRate = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -19,7 +20,7 @@ namespace legendary_garbanzo.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.ProviderId);
+                    table.PrimaryKey("PK_Categories", x => new { x.ProviderId, x.CategoryNumber });
                 });
 
             migrationBuilder.CreateTable(
@@ -59,7 +60,8 @@ namespace legendary_garbanzo.Migrations
                     AptNum = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     City = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     State = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    Zip = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
+                    Zip = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

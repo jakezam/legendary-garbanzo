@@ -18,7 +18,9 @@ namespace legendary_garbanzo.Data
         void UpdateUser(User user);
         
         // Categories //
-        List<Category> GetCategoriesById(int providerId);
+        List<Category> GetCategoriesById(Guid providerId);
+        void CreateCategory(Category category);
+        void UpdateCategory(Category category);
 
         // Providers //
         IEnumerable<Provider> GetAllProviders(string category);

@@ -21,7 +21,10 @@ namespace legendary_garbanzo.Migrations
 
             modelBuilder.Entity("legendary_garbanzo.Models.Category", b =>
                 {
-                    b.Property<int>("ProviderId")
+                    b.Property<Guid>("ProviderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CategoryNumber")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -38,7 +41,7 @@ namespace legendary_garbanzo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProviderId");
+                    b.HasKey("ProviderId", "CategoryNumber");
 
                     b.ToTable("Categories");
                 });

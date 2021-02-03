@@ -50,9 +50,26 @@ namespace legendary_garbanzo.Data
         #endregion
 
         #region Categories
-        public List<Category> GetCategoriesById(int providerId)
+        public List<Category> GetCategoriesById(Guid providerId)
         {
             return _context.Categories.Where(sc => sc.ProviderId == providerId).ToList();
+        }
+        
+        public void CreateCategory(Category category)
+        {
+            if (category == null)
+                throw new ArgumentNullException(nameof(category));
+
+            _context.Categories.Add(category);
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            if (category == null)
+                throw new ArgumentNullException(nameof(category));
+
+            _context.Categories.Update(category);
+            
         }
         #endregion
 
@@ -95,6 +112,7 @@ namespace legendary_garbanzo.Data
         }
         #endregion
 
+        // TODO: Update and test Reviews and Jobs API
         #region Reviews
         public IEnumerable<Review> GetReviews(string userId, string receivedReviews)
         {

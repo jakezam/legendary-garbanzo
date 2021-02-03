@@ -1,12 +1,18 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+#pragma warning disable 1591 /*XML Doc String Warning*/
+
 namespace legendary_garbanzo.Models
 {
+    // Note that KEYs are set in DbContext!!!
     public class Category
     {
-        [Key]
-        public int ProviderId { get; set; }
+        [Required]
+        public Guid ProviderId { get; set; }
+        
+        [Required]
+        public int CategoryNumber { get; set; }
 
         [Required]
         public string ProviderCategory { get; set; }

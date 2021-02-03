@@ -31,6 +31,21 @@ namespace legendary_garbanzo.Data
             throw new NotImplementedException();
         }
 
+        public List<Category> GetCategoriesById(Guid providerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Category> GetCategoriesById(int providerId)
         {
             throw new NotImplementedException();

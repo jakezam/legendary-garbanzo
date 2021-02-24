@@ -1,4 +1,4 @@
-# legendary-garbanzo
+# Inployd
 
 ## General Overview
 This is a mock up repository a business exchange app in the works.
@@ -18,3 +18,4 @@ This is a mock up repository a business exchange app in the works.
 
 ## Other Information
  - A new web page mockups are under Nick's Lucidchart account
+

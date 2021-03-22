@@ -28,5 +28,7 @@ namespace legendary_garbanzo.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Job> Jobs { get; set; }
+
+        public DbSet<Notification> Notifications { get; set; }
     }
 }

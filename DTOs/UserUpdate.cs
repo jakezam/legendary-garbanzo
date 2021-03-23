@@ -5,12 +5,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace legendary_garbanzo.DTOs
 {
-    public class UserRead
+    public class UserUpdate
     {
-        [Key]
-        [Required]
-        public Guid UserId { get; set; }
-        
         [Required]
         [MaxLength(64)]
         public string FirstName { get; set; }
@@ -29,8 +25,5 @@ namespace legendary_garbanzo.DTOs
         [Required]
         [MaxLength(64)]
         public string State { get; set; }
-        
-        [Required]
-        public DateTime CreatedDate { get; set; }
     }
 }

@@ -34,5 +34,9 @@ namespace legendary_garbanzo.Models
         public DateTime CreatedDate { get; set; }
 
         public ICollection<Notification> Notifications { get; set; }
+
+        public ICollection<PrivateMessage> Inbox { get; set; }
+
+        public ICollection<PrivateMessage> Sent { get; set; }
     }
 }

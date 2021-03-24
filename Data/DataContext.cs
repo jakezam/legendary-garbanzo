@@ -30,5 +30,7 @@ namespace legendary_garbanzo.Data
         public DbSet<Job> Jobs { get; set; }
 
         public DbSet<Notification> Notifications { get; set; }
+
+        public DbSet<PrivateMessage> PrivateMessages { get; set; }
     }
 }

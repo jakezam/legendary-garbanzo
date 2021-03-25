@@ -1,17 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
-
-namespace legendary_garbanzo.Models
+namespace legendary_garbanzo.DTOs
 {
-    public class PrivateMessage
+    public class PrivateMessageRead
     {
-
-        [Key]
+        [Required]
         public Guid PrivateMessageId { get; set; }
         [Required]
         public string Subject { get; set; }

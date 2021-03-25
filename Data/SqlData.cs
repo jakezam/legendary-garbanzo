@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using legendary_garbanzo.Models;
+using Microsoft.EntityFrameworkCore;
 
 #pragma warning disable 1591 /*XML Doc String Warning*/
 
@@ -49,8 +50,17 @@ namespace legendary_garbanzo.Data
             _context.PrivateMessages.Add(message);
             from.Sent.Add(message);
             to.Inbox.Add(message);
-
         }
+        public ICollection<PrivateMessage> GetUserInbox(Guid userId)
+        {
+            return _context.Users.Include(User => User.Inbox).FirstOrDefault(user => user.UserId == userId).Inbox;
+        }
+
+        public ICollection<PrivateMessage> GetUserSent(Guid userId)
+        {
+            return _context.Users.Include(User => User.Inbox).FirstOrDefault(user => user.UserId == userId).Sent;
+        }
+
         public void UpdateUser(User user)
         {
             if (user == null)

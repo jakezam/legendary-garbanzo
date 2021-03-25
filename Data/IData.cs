@@ -16,6 +16,8 @@ namespace legendary_garbanzo.Data
         User GetUserById(Guid userId);
         void CreateUser(User user);
         void UpdateUser(User user);
+        ICollection<PrivateMessage> GetUserInbox(Guid userId);
+        ICollection<PrivateMessage> GetUserSent(Guid userId);
         void SendMessage(PrivateMessage message);
         
         // Categories //

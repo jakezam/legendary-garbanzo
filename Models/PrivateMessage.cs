@@ -20,5 +20,6 @@ namespace legendary_garbanzo.Models
 
         public Guid From { get; set; }
 
+        public Guid To { get; set; }
     }
 }

@@ -38,7 +38,19 @@ namespace legendary_garbanzo.Data
 
             _context.Users.Add(user);
         }
+        public void SendMessage(PrivateMessage message)
+        {
+            if (message == null)
+                throw new ArgumentNullException(nameof(message));
+            var from = _context.Users.Find(message.From);
+            var to = _context.Users.Find(message.To);
+            if (to == null || from == null)
+                throw new ArgumentNullException(nameof(message));
+            _context.PrivateMessages.Add(message);
+            from.Sent.Add(message);
+            to.Inbox.Add(message);
 
+        }
         public void UpdateUser(User user)
         {
             if (user == null)

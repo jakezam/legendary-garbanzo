@@ -4,9 +4,10 @@ using legendary_garbanzo.Data;
 using legendary_garbanzo.DTOs;
 using legendary_garbanzo.Models;
 using Microsoft.AspNetCore.Mvc;
-
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace legendary_garbanzo.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class JobsController : ControllerBase
@@ -29,11 +30,11 @@ namespace legendary_garbanzo.Controllers
                 return Ok(_mapper.Map<IEnumerable<JobRead>>(jobs));
 
             return NotFound();
-
         }
 
         // GET api/users/{id}
         [HttpGet("{jobId}", Name = nameof(GetJobById))]
+
         public ActionResult<JobRead> GetJobById(int jobId)
         {
             var job = _data.GetJobById(jobId);
@@ -55,6 +56,30 @@ namespace legendary_garbanzo.Controllers
             var jobRead = _mapper.Map<JobRead>(jobModel);
 
             return CreatedAtRoute(nameof(GetJobById), new { JobId = jobRead.Id }, jobRead);
+        }
+
+        // POST api/jobs/id
+        [HttpPost("{jobId}")]
+        public ActionResult<ConsultationRequestCreate> CreateConsultationRequest(int jobId, ConsultationRequestCreate consultationRequestCreate)
+        {
+            var job = _data.GetJobById(jobId);
+            var from = _data.GetUserById(consultationRequestCreate.From);
+            if (job == null || from == null)
+            {
+                return NotFound();
+            }
+            var consultationMessage = new PrivateMessage
+            {
+                From = consultationRequestCreate.From,
+                To = consultationRequestCreate.To,
+                Message = consultationRequestCreate.Message,
+                Subject = "Consultation Request From " + from.FirstName + " " + from.LastName + "For Job: " + job.JobTitle
+            };
+            _data.SendMessage(consultationMessage);
+            _data.SaveChanges();
+
+            return CreatedAtRoute(nameof(consultationMessage.PrivateMessageId), new { PrivateMessageId = consultationMessage.PrivateMessageId });
+
         }
 
         // PUT api/users/{id}

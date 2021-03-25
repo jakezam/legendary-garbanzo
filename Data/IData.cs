@@ -16,6 +16,7 @@ namespace legendary_garbanzo.Data
         User GetUserById(Guid userId);
         void CreateUser(User user);
         void UpdateUser(User user);
+        void SendMessage(PrivateMessage message);
         
         // Categories //
         List<Category> GetCategoriesById(Guid providerId);

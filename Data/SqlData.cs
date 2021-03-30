@@ -39,6 +39,8 @@ namespace legendary_garbanzo.Data
 
             _context.Users.Add(user);
         }
+
+
         public void SendMessage(PrivateMessage message)
         {
             if (message == null)
@@ -50,6 +52,15 @@ namespace legendary_garbanzo.Data
             _context.PrivateMessages.Add(message);
             from.Sent.Add(message);
             to.Inbox.Add(message);
+        }
+
+        public void DeletePrivateMessage(PrivateMessage message)
+        {
+            _context.PrivateMessages.Remove(message);
+        }
+        public PrivateMessage GetPrivateMessage(Guid messageId)
+        {
+            return _context.PrivateMessages.Find(messageId);
         }
         public ICollection<PrivateMessage> GetUserInbox(Guid userId)
         {

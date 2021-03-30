@@ -10,8 +10,6 @@ namespace legendary_garbanzo.DTOs
     public class PrivateMessageRead
     {
         [Required]
-        public Guid PrivateMessageId { get; set; }
-        [Required]
         public string Subject { get; set; }
         [Required]
         public string Message { get; set; }

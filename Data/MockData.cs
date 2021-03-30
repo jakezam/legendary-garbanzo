@@ -35,6 +35,14 @@ namespace legendary_garbanzo.Data
         {
             throw new NotImplementedException();
         }
+        public void DeletePrivateMessage(PrivateMessage message)
+        {
+            throw new NotImplementedException();
+        }
+        public PrivateMessage GetPrivateMessage(Guid messageId)
+        {
+            throw new NotImplementedException();
+        }
         public ICollection<PrivateMessage> GetUserInbox(Guid userId)
         {
             throw new NotImplementedException();

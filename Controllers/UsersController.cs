@@ -47,20 +47,6 @@ namespace legendary_garbanzo.Controllers
             return NotFound();
         }
 
-        // GET api/users/{id}/Inbox
-        [HttpGet("{userId}/inbox", Name = nameof(GetUserInbox))]
-        public ICollection<PrivateMessageRead> GetUserInbox(Guid userId)
-        {
-            return (ICollection<PrivateMessageRead>)_data.GetUserInbox(userId);
-        }
-
-        // GET api/users/{id}/Inbox
-        [HttpGet("{userId}/outbox", Name = nameof(GetUserSent))]
-        public ICollection<PrivateMessageRead> GetUserSent(Guid userId)
-        {
-            return (ICollection<PrivateMessageRead>)_data.GetUserSent(userId);
-        }
-
         // POST api/users
         [HttpPost]
         public ActionResult<UserCreate> CreateUser(UserCreate userCreate)

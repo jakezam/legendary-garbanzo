@@ -16,9 +16,7 @@ namespace legendary_garbanzo.Data
         User GetUserById(Guid userId);
         void CreateUser(User user);
         void UpdateUser(User user);
-        ICollection<PrivateMessage> GetUserInbox(Guid userId);
-        ICollection<PrivateMessage> GetUserSent(Guid userId);
-        void SendMessage(PrivateMessage message);
+        
         
         // Categories //
         List<Category> GetCategoriesById(Guid providerId);
@@ -42,5 +40,12 @@ namespace legendary_garbanzo.Data
         Job GetJobById(int jobId);
         void CreateJob(Job job);
         void UpdateJob(Job job);
+
+        // Messages //
+        ICollection<PrivateMessage> GetUserInbox(Guid userId);
+        ICollection<PrivateMessage> GetUserSent(Guid userId);
+        void SendMessage(PrivateMessage message);
+        PrivateMessage GetPrivateMessage(Guid messageId);
+        void DeletePrivateMessage(PrivateMessage message);
     }
 }

@@ -199,7 +199,7 @@ namespace legendary_garbanzo.Data
                 var id = userId;
                 var jobs = _context.Jobs.ToList();
                 var specific = from job in jobs
-                               where job.UserId.ToString() == id;
+                               where job.UserId.ToString() == id
                                select job;
                 return specific;
             }

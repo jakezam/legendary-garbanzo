@@ -6,13 +6,13 @@ namespace legendary_garbanzo.Models
     public class Review
     {
         [Key]
-        public int ReviewId { get; set; }
+        public Guid ReviewId { get; set; }
 
         [Required]
-        public int ReceivingUserId { get; set; }
+        public Guid ReceivingUserId { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Required]
         [MaxLength(255)]

@@ -6,10 +6,10 @@ namespace legendary_garbanzo.DTOs
     public class ReviewCreate
     {
         [Required]
-        public int ReceivingUserId { get; set; }
+        public Guid ReceivingUserId { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Required]
         [MaxLength(255)]

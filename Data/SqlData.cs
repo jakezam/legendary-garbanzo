@@ -155,16 +155,16 @@ namespace legendary_garbanzo.Data
             }
             else
             {
-                var id = Int16.Parse(userId);
+                var id = userId;
                 var reviews = _context.Reviews.ToList();
                 var specific = from review in reviews
-                               where review.UserId == id
+                               where review.UserId.ToString() == id
                                select review;
 
                 if (receivedReviews == "true")
                 {
                     specific = from review in reviews
-                               where review.ReceivingUserId == id
+                               where review.ReceivingUserId.ToString() == id
                                select review;
                 }
                 return specific;
@@ -172,7 +172,7 @@ namespace legendary_garbanzo.Data
         }
         public Review GetReviewById(int reviewId)
         {
-            return _context.Reviews.FirstOrDefault(u => u.ReviewId == reviewId);
+            return _context.Reviews.FirstOrDefault(u => u.ReviewId.ToString() == reviewId.ToString());
         }
         public void CreateReview(Review review)
         {
@@ -196,17 +196,17 @@ namespace legendary_garbanzo.Data
             }
             else
             {
-                int id = Int16.Parse(userId);
+                var id = userId;
                 var jobs = _context.Jobs.ToList();
                 var specific = from job in jobs
-                               where job.UserId == id
+                               where job.UserId.ToString() == id;
                                select job;
                 return specific;
             }
         }
         public Job GetJobById(int jobId)
         {
-            return _context.Jobs.FirstOrDefault(u => u.Id == jobId);
+            return _context.Jobs.FirstOrDefault(u => u.Id.ToString() == jobId.ToString());
         }
         public void CreateJob(Job job)
         {

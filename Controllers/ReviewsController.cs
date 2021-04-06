@@ -55,7 +55,7 @@ namespace legendary_garbanzo.Controllers
             _data.SaveChanges();
 
             var reviewRead = _mapper.Map<Review>(reviewModel);
-
+            
             return CreatedAtRoute(nameof(GetReviewById), new { ReviewId = reviewRead.ReviewId }, reviewRead);
         }
     }

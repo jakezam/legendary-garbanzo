@@ -6,10 +6,10 @@ namespace legendary_garbanzo.DTOs
     public class JobUpdate
     {
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Required]
-        public int ProviderId { get; set; }
+        public Guid ProviderId { get; set; }
 
         [Required]
         public DateTime BeginDate { get; set; }

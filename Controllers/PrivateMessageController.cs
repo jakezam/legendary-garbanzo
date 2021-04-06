@@ -30,7 +30,7 @@ namespace legendary_garbanzo.Controllers
             return (ICollection<PrivateMessageRead>)_data.GetUserInbox(userId);
         }
 
-        // GET api/users/{id}/Inbox
+        // GET api/users/{id}/Outbox
         [HttpGet("{userId}/outbox", Name = nameof(GetUserSent))]
         public ICollection<PrivateMessageRead> GetUserSent(Guid userId)
         {

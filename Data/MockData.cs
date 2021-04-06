@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using legendary_garbanzo.Models;
-
+#pragma warning disable 1591 /*XML Doc String Warning*/
 namespace legendary_garbanzo.Data
 {
     public class MockData : IData
@@ -27,6 +27,27 @@ namespace legendary_garbanzo.Data
         }
 
         public void UpdateUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendMessage(PrivateMessage message)
+        {
+            throw new NotImplementedException();
+        }
+        public void DeletePrivateMessage(PrivateMessage message)
+        {
+            throw new NotImplementedException();
+        }
+        public PrivateMessage GetPrivateMessage(Guid messageId)
+        {
+            throw new NotImplementedException();
+        }
+        public ICollection<PrivateMessage> GetUserInbox(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+        public ICollection<PrivateMessage> GetUserSent(Guid userId)
         {
             throw new NotImplementedException();
         }

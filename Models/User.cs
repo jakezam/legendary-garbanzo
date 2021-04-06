@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 #pragma warning disable 1591 /*XML Doc String Warning*/
@@ -31,5 +32,11 @@ namespace legendary_garbanzo.Models
         
         [Required]
         public DateTime CreatedDate { get; set; }
+
+        public ICollection<Notification> Notifications { get; set; }
+
+        public ICollection<PrivateMessage> Inbox { get; set; }
+
+        public ICollection<PrivateMessage> Sent { get; set; }
     }
 }

@@ -186,3 +186,5 @@ fabric.properties
 .idea/.idea.legendary-garbanzo/.idea/
 
 .vs/
+
+*.v2

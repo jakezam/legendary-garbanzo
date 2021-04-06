@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using legendary_garbanzo.Models;
+using Microsoft.EntityFrameworkCore;
 
 #pragma warning disable 1591 /*XML Doc String Warning*/
 
@@ -37,6 +38,38 @@ namespace legendary_garbanzo.Data
                 throw new ArgumentNullException(nameof(user));
 
             _context.Users.Add(user);
+        }
+
+
+        public void SendMessage(PrivateMessage message)
+        {
+            if (message == null)
+                throw new ArgumentNullException(nameof(message));
+            var from = _context.Users.Find(message.From);
+            var to = _context.Users.Find(message.To);
+            if (to == null || from == null)
+                throw new ArgumentNullException(nameof(message));
+            _context.PrivateMessages.Add(message);
+            from.Sent.Add(message);
+            to.Inbox.Add(message);
+        }
+
+        public void DeletePrivateMessage(PrivateMessage message)
+        {
+            _context.PrivateMessages.Remove(message);
+        }
+        public PrivateMessage GetPrivateMessage(Guid messageId)
+        {
+            return _context.PrivateMessages.Find(messageId);
+        }
+        public ICollection<PrivateMessage> GetUserInbox(Guid userId)
+        {
+            return _context.Users.Include(User => User.Inbox).FirstOrDefault(user => user.UserId == userId).Inbox;
+        }
+
+        public ICollection<PrivateMessage> GetUserSent(Guid userId)
+        {
+            return _context.Users.Include(User => User.Inbox).FirstOrDefault(user => user.UserId == userId).Sent;
         }
 
         public void UpdateUser(User user)
@@ -122,16 +155,16 @@ namespace legendary_garbanzo.Data
             }
             else
             {
-                var id = Int16.Parse(userId);
+                var id = userId;
                 var reviews = _context.Reviews.ToList();
                 var specific = from review in reviews
-                               where review.UserId == id
+                               where review.UserId.ToString() == id
                                select review;
 
                 if (receivedReviews == "true")
                 {
                     specific = from review in reviews
-                               where review.ReceivingUserId == id
+                               where review.ReceivingUserId.ToString() == id
                                select review;
                 }
                 return specific;
@@ -139,7 +172,7 @@ namespace legendary_garbanzo.Data
         }
         public Review GetReviewById(int reviewId)
         {
-            return _context.Reviews.FirstOrDefault(u => u.ReviewId == reviewId);
+            return _context.Reviews.FirstOrDefault(u => u.ReviewId.ToString() == reviewId.ToString());
         }
         public void CreateReview(Review review)
         {
@@ -163,17 +196,17 @@ namespace legendary_garbanzo.Data
             }
             else
             {
-                int id = Int16.Parse(userId);
+                var id = userId;
                 var jobs = _context.Jobs.ToList();
                 var specific = from job in jobs
-                               where job.UserId == id
+                               where job.UserId.ToString() == id
                                select job;
                 return specific;
             }
         }
         public Job GetJobById(int jobId)
         {
-            return _context.Jobs.FirstOrDefault(u => u.Id == jobId);
+            return _context.Jobs.FirstOrDefault(u => u.Id.ToString() == jobId.ToString());
         }
         public void CreateJob(Job job)
         {

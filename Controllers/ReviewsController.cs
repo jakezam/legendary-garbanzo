@@ -52,10 +52,28 @@ namespace legendary_garbanzo.Controllers
         {
             var reviewModel = _mapper.Map<Review>(reviewCreate);
             _data.CreateReview(reviewModel);
-            _data.SaveChanges();
-
-            var reviewRead = _mapper.Map<Review>(reviewModel);
             
+            var toUser = _data.GetUserInbox(reviewCreate.ReceivingUserId);
+            var negOrPos = "positive";
+
+            if (!reviewCreate.WouldRecommend)
+            {
+                negOrPos = "negative";
+            }
+
+            var reviewMessage = new PrivateMessage
+            {
+                From = reviewCreate.UserId,
+                To = reviewCreate.ReceivingUserId,
+                Subject = "New Review From: " + reviewCreate.Username,
+                Message = "A " + negOrPos + " review has been posted on your profile by " + reviewCreate.Username
+                        + " with a rating of " + reviewCreate.Rating.ToString()
+                        + ". \"" + reviewCreate.Description + "\".",
+
+            };
+            _data.SendMessage(reviewMessage);
+            var reviewRead = _mapper.Map<Review>(reviewModel);
+            _data.SaveChanges();
             return CreatedAtRoute(nameof(GetReviewById), new { ReviewId = reviewRead.ReviewId }, reviewRead);
         }
     }

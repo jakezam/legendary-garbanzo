@@ -21,7 +21,7 @@ namespace legendary_garbanzo.Controllers
             _mapper = mapper;
         }
 
-        // GET api/users
+        // GET api/jobs
         [HttpGet]
         public ActionResult<IEnumerable<JobRead>> GetJobs(Guid userId)
         {
@@ -33,7 +33,7 @@ namespace legendary_garbanzo.Controllers
             return NotFound();
         }
 
-        // GET api/users/{id}
+        // GET api/jobs/{id}
         [HttpGet("{jobId}", Name = nameof(GetJobById))]
 
         public ActionResult<JobRead> GetJobById(Guid jobId)
@@ -46,7 +46,7 @@ namespace legendary_garbanzo.Controllers
             return NotFound();
         }
 
-        // POST api/users
+        // POST api/jobs
         [HttpPost]
         public ActionResult<JobCreate> CreateJob(JobCreate jobCreate)
         {
@@ -59,36 +59,53 @@ namespace legendary_garbanzo.Controllers
             return CreatedAtRoute(nameof(GetJobById), new { JobId = jobRead.Id }, jobRead);
         }
 
-        // POST api/jobs/id
-        [HttpPost("{jobId}")]
+        // POST api/jobs/request
+        [HttpPost("request")]
         public ActionResult<ConsultationRequestCreate> CreateConsultationRequest(ConsultationRequestCreate consultationRequestCreate)
         {
             var categories = _data.GetCategoriesById(consultationRequestCreate.To);
             Category category = null;
             foreach (var cat in categories)
             {
-                if (cat.CategoryNumber == consultationRequestCreate.CategoryNumber)
+                if (cat.ProviderCategory == consultationRequestCreate.ProviderCategory)
                 {
                     category = cat;
                 }
             }
 
             var from = _data.GetUserById(consultationRequestCreate.From);
-            if (category == null || from == null)
+
+            if (from == null)
             {
                 return NotFound();
             }
 
-            var consultationMessage = new PrivateMessage
+            PrivateMessage consultationMessage;
+
+            if (category == null)
             {
-                From = consultationRequestCreate.From,
-                To = consultationRequestCreate.To,
-                Message = consultationRequestCreate.Message,
-                Subject = "Consultation Request From " + from.FirstName + " " + from.LastName
+                consultationMessage = new PrivateMessage
+                {
+                    From = consultationRequestCreate.From,
+                    To = consultationRequestCreate.To,
+                    Message = consultationRequestCreate.Message,
+                    Subject = "Consultation Request From " + from.FirstName + " " + from.LastName
                         + "For category: " + category.ProviderCategory
                         + "For hourly price: " + category.HourlyRate
                         + "For flat rate: " + category.FlatRate,
-            };
+                };
+            }
+            else
+            {
+                consultationMessage = new PrivateMessage
+                {
+                    From = consultationRequestCreate.From,
+                    To = consultationRequestCreate.To,
+                    Message = consultationRequestCreate.Message,
+                    Subject = "Consultation Request From " + from.FirstName + " " + from.LastName
+                };
+            }
+            
 
             _data.SendMessage(consultationMessage);
             _data.SaveChanges();
@@ -97,7 +114,7 @@ namespace legendary_garbanzo.Controllers
 
         }
 
-        // PUT api/users/{id}
+        // PUT api/jobs/{id}
         [HttpPut("{id}")]
         public ActionResult<JobUpdate> UpdateJob(Guid id, JobUpdate jobUpdate)
         {

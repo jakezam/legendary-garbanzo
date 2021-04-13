@@ -12,6 +12,9 @@ namespace legendary_garbanzo.DTOs
         public Guid From { get; set; }
 
         [Required]
+        public int CategoryNumber { get; set; }
+
+        [Required]
         public string Message { get; set; }
     }
 }

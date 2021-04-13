@@ -63,19 +63,33 @@ namespace legendary_garbanzo.Controllers
         [HttpPost("{jobId}")]
         public ActionResult<ConsultationRequestCreate> CreateConsultationRequest(ConsultationRequestCreate consultationRequestCreate)
         {
-            var job = _data.GetJobById(consultationRequestCreate.JobId);
+            var categories = _data.GetCategoriesById(consultationRequestCreate.To);
+            Category category = null;
+            foreach (var cat in categories)
+            {
+                if (cat.CategoryNumber == consultationRequestCreate.CategoryNumber)
+                {
+                    category = cat;
+                }
+            }
+
             var from = _data.GetUserById(consultationRequestCreate.From);
-            if (job == null || from == null)
+            if (category == null || from == null)
             {
                 return NotFound();
             }
+
             var consultationMessage = new PrivateMessage
             {
                 From = consultationRequestCreate.From,
                 To = consultationRequestCreate.To,
                 Message = consultationRequestCreate.Message,
-                Subject = "Consultation Request From " + from.FirstName + " " + from.LastName + "For Job: " + job.JobTitle
+                Subject = "Consultation Request From " + from.FirstName + " " + from.LastName
+                        + "For category: " + category.ProviderCategory
+                        + "For hourly price: " + category.HourlyRate
+                        + "For flat rate: " + category.FlatRate,
             };
+
             _data.SendMessage(consultationMessage);
             _data.SaveChanges();
 

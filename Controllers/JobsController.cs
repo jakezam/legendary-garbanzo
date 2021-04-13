@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AutoMapper;
 using legendary_garbanzo.Data;
@@ -22,7 +23,7 @@ namespace legendary_garbanzo.Controllers
 
         // GET api/users
         [HttpGet]
-        public ActionResult<IEnumerable<JobRead>> GetJobs(string userId)
+        public ActionResult<IEnumerable<JobRead>> GetJobs(Guid userId)
         {
             var jobs = _data.GetJobs(userId);
 
@@ -35,7 +36,7 @@ namespace legendary_garbanzo.Controllers
         // GET api/users/{id}
         [HttpGet("{jobId}", Name = nameof(GetJobById))]
 
-        public ActionResult<JobRead> GetJobById(int jobId)
+        public ActionResult<JobRead> GetJobById(Guid jobId)
         {
             var job = _data.GetJobById(jobId);
 
@@ -60,9 +61,9 @@ namespace legendary_garbanzo.Controllers
 
         // POST api/jobs/id
         [HttpPost("{jobId}")]
-        public ActionResult<ConsultationRequestCreate> CreateConsultationRequest(int jobId, ConsultationRequestCreate consultationRequestCreate)
+        public ActionResult<ConsultationRequestCreate> CreateConsultationRequest(ConsultationRequestCreate consultationRequestCreate)
         {
-            var job = _data.GetJobById(jobId);
+            var job = _data.GetJobById(consultationRequestCreate.JobId);
             var from = _data.GetUserById(consultationRequestCreate.From);
             if (job == null || from == null)
             {
@@ -84,7 +85,7 @@ namespace legendary_garbanzo.Controllers
 
         // PUT api/users/{id}
         [HttpPut("{id}")]
-        public ActionResult<JobUpdate> UpdateJob(int id, JobUpdate jobUpdate)
+        public ActionResult<JobUpdate> UpdateJob(Guid id, JobUpdate jobUpdate)
         {
             var jobModel = _data.GetJobById(id);
             if (jobModel == null)

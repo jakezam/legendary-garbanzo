@@ -153,7 +153,7 @@ namespace legendary_garbanzo.Data
 
         // TODO: Update and test Reviews and Jobs API
         #region Reviews
-        public IEnumerable<Review> GetReviews(string userId, string receivedReviews)
+        public IEnumerable<Review> GetReviews(Guid userId, string receivedReviews)
         {
             if (userId == null)
             {
@@ -164,21 +164,21 @@ namespace legendary_garbanzo.Data
                 var id = userId;
                 var reviews = _context.Reviews.ToList();
                 var specific = from review in reviews
-                               where review.UserId.ToString() == id
+                               where review.UserId == id
                                select review;
 
                 if (receivedReviews == "true")
                 {
                     specific = from review in reviews
-                               where review.ReceivingUserId.ToString() == id
+                               where review.ReceivingUserId == id
                                select review;
                 }
                 return specific;
             }
         }
-        public Review GetReviewById(int reviewId)
+        public Review GetReviewById(Guid reviewId)
         {
-            return _context.Reviews.FirstOrDefault(u => u.ReviewId.ToString() == reviewId.ToString());
+            return _context.Reviews.FirstOrDefault(u => u.ReviewId == reviewId);
         }
         public void CreateReview(Review review)
         {
@@ -194,7 +194,7 @@ namespace legendary_garbanzo.Data
         #endregion
 
         #region Jobs
-        public IEnumerable<Job> GetJobs(string userId)
+        public IEnumerable<Job> GetJobs(Guid userId)
         {
             if (userId == null)
             {
@@ -205,14 +205,14 @@ namespace legendary_garbanzo.Data
                 var id = userId;
                 var jobs = _context.Jobs.ToList();
                 var specific = from job in jobs
-                               where job.UserId.ToString() == id
+                               where job.UserId == id
                                select job;
                 return specific;
             }
         }
-        public Job GetJobById(int jobId)
+        public Job GetJobById(Guid jobId)
         {
-            return _context.Jobs.FirstOrDefault(u => u.Id.ToString() == jobId.ToString());
+            return _context.Jobs.FirstOrDefault(u => u.Id == jobId);
         }
         public void CreateJob(Job job)
         {

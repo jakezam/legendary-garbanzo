@@ -67,11 +67,6 @@ namespace legendary_garbanzo.Data
             throw new NotImplementedException();
         }
 
-        public List<Category> GetCategoriesById(int providerId)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<Provider> GetAllProviders(string category)
         {
             throw new NotImplementedException();
@@ -97,12 +92,12 @@ namespace legendary_garbanzo.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Review> GetReviews(string userId, string receivedReviews)
+        public IEnumerable<Review> GetReviews(Guid userId, string receivedReviews)
         {
             throw new NotImplementedException();
         }
 
-        public Review GetReviewById(int reviewId)
+        public Review GetReviewById(Guid reviewId)
         {
             throw new NotImplementedException();
         }
@@ -117,12 +112,12 @@ namespace legendary_garbanzo.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Job> GetJobs(string userId)
+        public IEnumerable<Job> GetJobs(Guid userId)
         {
             throw new NotImplementedException();
         }
 
-        public Job GetJobById(int jobId)
+        public Job GetJobById(Guid jobId)
         {
             throw new NotImplementedException();
         }

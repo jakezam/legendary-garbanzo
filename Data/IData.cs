@@ -33,14 +33,14 @@ namespace legendary_garbanzo.Data
         IEnumerable<ProviderTypes> GetProviderTypes();
 
         // Reviews //
-        IEnumerable<Review> GetReviews(string userId, string receivedReviews);
-        Review GetReviewById(int reviewId);
+        IEnumerable<Review> GetReviews(Guid userId, string receivedReviews);
+        Review GetReviewById(Guid reviewId);
         void CreateReview(Review review);
         void UpdateReview(Review review);
 
         // Jobs //
-        IEnumerable<Job> GetJobs(string userId);
-        Job GetJobById(int jobId);
+        IEnumerable<Job> GetJobs(Guid userId);
+        Job GetJobById(Guid jobId);
         void CreateJob(Job job);
         void UpdateJob(Job job);
 

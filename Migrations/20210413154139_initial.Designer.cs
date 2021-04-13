@@ -10,8 +10,8 @@ using legendary_garbanzo.Data;
 namespace legendary_garbanzo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210412234441_addedProviderTypes")]
-    partial class addedProviderTypes
+    [Migration("20210413154139_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

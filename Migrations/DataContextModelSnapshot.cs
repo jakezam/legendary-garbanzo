@@ -48,10 +48,9 @@ namespace legendary_garbanzo.Migrations
 
             modelBuilder.Entity("legendary_garbanzo.Models.Job", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("BeginDate")
                         .HasColumnType("datetime2");
@@ -81,15 +80,75 @@ namespace legendary_garbanzo.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("ProviderId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProviderId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.ToTable("Jobs");
+                });
+
+            modelBuilder.Entity("legendary_garbanzo.Models.Notification", b =>
+                {
+                    b.Property<Guid>("NotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("From")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("NotificationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("legendary_garbanzo.Models.PrivateMessage", b =>
+                {
+                    b.Property<Guid>("PrivateMessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("From")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("To")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PrivateMessageId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("PrivateMessages");
                 });
 
             modelBuilder.Entity("legendary_garbanzo.Models.Provider", b =>
@@ -157,12 +216,28 @@ namespace legendary_garbanzo.Migrations
                     b.ToTable("Providers");
                 });
 
+            modelBuilder.Entity("legendary_garbanzo.Models.ProviderTypes", b =>
+                {
+                    b.Property<Guid>("TypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TypeId");
+
+                    b.ToTable("ProviderTypes");
+                });
+
             modelBuilder.Entity("legendary_garbanzo.Models.Review", b =>
                 {
-                    b.Property<int>("ReviewId")
+                    b.Property<Guid>("ReviewId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -180,11 +255,11 @@ namespace legendary_garbanzo.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReceivingUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ReceivingUserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -234,6 +309,33 @@ namespace legendary_garbanzo.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("legendary_garbanzo.Models.Notification", b =>
+                {
+                    b.HasOne("legendary_garbanzo.Models.User", null)
+                        .WithMany("Notifications")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("legendary_garbanzo.Models.PrivateMessage", b =>
+                {
+                    b.HasOne("legendary_garbanzo.Models.User", null)
+                        .WithMany("Inbox")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("legendary_garbanzo.Models.User", null)
+                        .WithMany("Sent")
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("legendary_garbanzo.Models.User", b =>
+                {
+                    b.Navigation("Inbox");
+
+                    b.Navigation("Notifications");
+
+                    b.Navigation("Sent");
                 });
 #pragma warning restore 612, 618
         }

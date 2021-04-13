@@ -92,6 +92,11 @@ namespace legendary_garbanzo.Data
             throw new NotImplementedException();
         }
 
+        public IEnumerable<ProviderTypes> GetProviderTypes()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Review> GetReviews(string userId, string receivedReviews)
         {
             throw new NotImplementedException();

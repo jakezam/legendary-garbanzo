@@ -145,6 +145,12 @@ namespace legendary_garbanzo.Data
         }
         #endregion
 
+
+        public IEnumerable<ProviderTypes> GetProviderTypes()
+        {
+            return _context.ProviderTypes.ToList();
+        } 
+
         // TODO: Update and test Reviews and Jobs API
         #region Reviews
         public IEnumerable<Review> GetReviews(string userId, string receivedReviews)

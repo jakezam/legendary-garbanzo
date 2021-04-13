@@ -23,7 +23,7 @@ namespace legendary_garbanzo.Controllers
 
         // GET api/reviews
         [HttpGet]
-        public ActionResult<IEnumerable<ReviewRead>> GetReviews(string userId, string receivedReviews)
+        public ActionResult<IEnumerable<ReviewRead>> GetReviews(Guid userId, string receivedReviews)
         {
             var reviews = _data.GetReviews(userId, receivedReviews);
 
@@ -36,7 +36,7 @@ namespace legendary_garbanzo.Controllers
 
         // GET api/reviews/{id}
         [HttpGet("{reviewId}", Name = nameof(GetReviewById))]
-        public ActionResult<ReviewRead> GetReviewById(int reviewId)
+        public ActionResult<ReviewRead> GetReviewById(Guid reviewId)
         {
             var review = _data.GetReviewById(reviewId);
 

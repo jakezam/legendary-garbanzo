@@ -30,7 +30,7 @@ namespace legendary_garbanzo.Controllers
             var categories = _data.GetCategoriesById(providerId);
             
             if (categories != null)
-                return Ok(_mapper.Map<CategoryRead>(categories));
+                return Ok(_mapper.Map<IEnumerable<CategoryRead>>(categories));
             
             return NotFound();
         }

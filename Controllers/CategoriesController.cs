@@ -53,23 +53,5 @@ namespace legendary_garbanzo.Controllers
 
             return CreatedAtRoute(nameof(GetCategoriesById), new {categoryModel.ProviderId}, categoryRead);
         }
-
-        // PUT api/users/{id}
-        /// <remarks>
-        ///     Note that to update a user you MUST provide all the user properties. This
-        ///     may change in a future version of the application.
-        /// </remarks>
-        [HttpPut("{id}")]
-        public ActionResult<UserUpdate> UpdateUser(Guid id, UserUpdate userUpdate)
-        {
-            var oldUser = _data.GetUserById(id);
-            if (oldUser == null)
-                return NotFound();
-
-            _mapper.Map(userUpdate, oldUser);
-            _data.UpdateUser(oldUser);
-            _data.SaveChanges();
-            return Ok();
-        }
     }
 }

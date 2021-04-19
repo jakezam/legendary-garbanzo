@@ -61,18 +61,9 @@ namespace legendary_garbanzo.Controllers
 
         // POST api/jobs/request
         [HttpPost("request")]
-        public ActionResult<ConsultationRequestCreate> CreateConsultationRequest(ConsultationRequestCreate consultationRequestCreate)
+        public ActionResult<string> CreateConsultationRequest(ConsultationRequestCreate consultationRequestCreate)
         {
-            var categories = _data.GetCategoriesById(consultationRequestCreate.To);
-            Category category = null;
-            foreach (var cat in categories)
-            {
-                if (cat.ProviderCategory == consultationRequestCreate.ProviderCategory)
-                {
-                    category = cat;
-                }
-            }
-
+            
             var from = _data.GetUserById(consultationRequestCreate.From);
 
             if (from == null)
@@ -81,36 +72,21 @@ namespace legendary_garbanzo.Controllers
             }
 
             PrivateMessage consultationMessage;
-
-            if (category == null)
+            consultationMessage = new PrivateMessage
             {
-                consultationMessage = new PrivateMessage
-                {
-                    From = consultationRequestCreate.From,
-                    To = consultationRequestCreate.To,
-                    Message = consultationRequestCreate.Message,
-                    Subject = "Consultation Request From " + from.FirstName + " " + from.LastName
-                        + "For category: " + category.ProviderCategory
-                        + "For hourly price: " + category.HourlyRate
-                        + "For flat rate: " + category.FlatRate,
-                };
-            }
-            else
-            {
-                consultationMessage = new PrivateMessage
-                {
-                    From = consultationRequestCreate.From,
-                    To = consultationRequestCreate.To,
-                    Message = consultationRequestCreate.Message,
-                    Subject = "Consultation Request From " + from.FirstName + " " + from.LastName
-                };
-            }
+                From = consultationRequestCreate.From,
+                To = consultationRequestCreate.To,
+                Message = consultationRequestCreate.Message,
+                Subject = "Consultation Request From " + from.FirstName + " " + from.LastName
+                    + "Preferred Time: " + consultationRequestCreate.Time + "\n"
+                    + "Preferred Day: " + consultationRequestCreate.Day + "\n"
+            };
             
 
             _data.SendMessage(consultationMessage);
             _data.SaveChanges();
 
-            return CreatedAtRoute(nameof(consultationMessage.PrivateMessageId), new { PrivateMessageId = consultationMessage.PrivateMessageId });
+            return "Succesfully sent consultation request.";
 
         }
 

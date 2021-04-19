@@ -8,6 +8,12 @@ namespace legendary_garbanzo.Models
 {
     public class User
     {
+        public User()
+        {
+            this.Notifications = new HashSet<Notification>();
+            this.Inbox = new HashSet<PrivateMessage>();
+            this.Sent = new HashSet<PrivateMessage>();
+        }
         [Key]
         public Guid UserId { get; set; }
         

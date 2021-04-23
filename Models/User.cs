@@ -8,7 +8,36 @@ namespace legendary_garbanzo.Models
 {
     public class User
     {
-        [Key] public Guid UserId { get; set; }
+        public User()
+        {
+            this.Notifications = new HashSet<Notification>();
+            this.Inbox = new HashSet<PrivateMessage>();
+            this.Sent = new HashSet<PrivateMessage>();
+        }
+        [Key]
+        public Guid UserId { get; set; }
+        
+        [Required]
+        [MaxLength(64)]
+        public string FirstName { get; set; }
+        
+        [Required]
+        [MaxLength(64)]
+        public string LastName { get; set; }
+        
+        [Required]
+        public DateTime DateOfBirth { get; set; }
+        
+        [Required]
+        [MaxLength(64)]
+        public string Gender { get; set; }
+        
+        [Required]
+        [MaxLength(64)]
+        public string State { get; set; }
+        
+        [Required]
+        public DateTime CreatedDate { get; set; }
 
         [Required] [MaxLength(64)] public string FirstName { get; set; }
 

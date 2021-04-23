@@ -10,8 +10,13 @@ namespace legendary_garbanzo.DTOs
 
         [Required] public Guid From { get; set; }
 
-        [Required] public string ProviderCategory { get; set; }
+        [Required]
+        public string Time { get; set; }
 
-        [Required] public string Message { get; set; }
+        [Required]
+        public string Day { get; set; }
+
+        [Required]
+        public string Message { get; set; }
     }
 }

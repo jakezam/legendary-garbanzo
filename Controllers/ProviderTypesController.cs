@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using AutoMapper;
 using legendary_garbanzo.Data;
@@ -16,6 +14,7 @@ namespace legendary_garbanzo.Controllers
     {
         private readonly IData _data;
         private readonly IMapper _mapper;
+
         public ProviderTypesController(IData data, IMapper mapper)
         {
             _data = data;
@@ -32,7 +31,6 @@ namespace legendary_garbanzo.Controllers
                 return Ok(_mapper.Map<IEnumerable<ProviderTypes>>(providerTypes));
 
             return NotFound();
-
         }
     }
 }

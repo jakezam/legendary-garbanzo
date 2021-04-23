@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using AutoMapper;
 using legendary_garbanzo.Data;
@@ -17,6 +16,7 @@ namespace legendary_garbanzo.Controllers
     {
         private readonly IData _data;
         private readonly IMapper _mapper;
+
         public ProvidersController(IData data, IMapper mapper)
         {
             _data = data;
@@ -33,7 +33,6 @@ namespace legendary_garbanzo.Controllers
                 return Ok(_mapper.Map<IEnumerable<ProviderRead>>(providers));
 
             return NotFound();
-
         }
 
         // GET api/providers/{id}
@@ -58,7 +57,7 @@ namespace legendary_garbanzo.Controllers
 
             var providerRead = _mapper.Map<ProviderRead>(providerModel);
 
-            return CreatedAtRoute(nameof(GetProviderById), new { ProviderId = providerRead.ProviderId }, providerRead);
+            return CreatedAtRoute(nameof(GetProviderById), new {providerRead.ProviderId}, providerRead);
         }
 
         // PUT api/providers/{id}
@@ -70,10 +69,7 @@ namespace legendary_garbanzo.Controllers
         public ActionResult<ProviderUpdate> UpdateProvider(Guid id, ProviderUpdate providerUpdate)
         {
             var oldProvider = _data.GetProviderById(id);
-            if (oldProvider == null)
-            {
-                return NotFound();
-            }
+            if (oldProvider == null) return NotFound();
 
             _mapper.Map(providerUpdate, oldProvider);
             _data.UpdateProvider(oldProvider);

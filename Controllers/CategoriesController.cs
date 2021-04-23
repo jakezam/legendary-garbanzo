@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using AutoMapper;
 using legendary_garbanzo.Data;
@@ -17,31 +16,32 @@ namespace legendary_garbanzo.Controllers
     {
         private readonly IData _data;
         private readonly IMapper _mapper;
+
         public CategoriesController(IData data, IMapper mapper)
         {
             _data = data;
             _mapper = mapper;
         }
-        
+
         // GET api/categories/{providerId}
-        [HttpGet("{providerId}", Name=nameof(GetCategoriesById))]
+        [HttpGet("{providerId}", Name = nameof(GetCategoriesById))]
         public ActionResult<CategoryRead> GetCategoriesById(Guid providerId)
         {
             var categories = _data.GetCategoriesById(providerId);
-            
+
             if (categories != null)
                 return Ok(_mapper.Map<IEnumerable<CategoryRead>>(categories));
-            
+
             return NotFound();
         }
-        
+
         // POST api/categories/{providerId}
-        [HttpPost("{providerId}", Name=nameof(CreateCategory))]
+        [HttpPost("{providerId}", Name = nameof(CreateCategory))]
         public ActionResult<CategoryCreate> CreateCategory(Guid providerId, CategoryCreate categoryCreate)
         {
             // TODO: Check if providerId exits
             // categoryCreate.ProviderId = providerId;
-            
+
             var categoryModel = _mapper.Map<Category>(categoryCreate);
 
             categoryModel.ProviderId = providerId;

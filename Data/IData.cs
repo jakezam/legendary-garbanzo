@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using legendary_garbanzo.Models;
 
@@ -10,14 +9,14 @@ namespace legendary_garbanzo.Data
     public interface IData
     {
         bool SaveChanges();
-        
+
         // Users //
         IEnumerable<User> GetAllUsers();
         User GetUserById(Guid userId);
         void CreateUser(User user);
         void UpdateUser(User user);
-        
-        
+
+
         // Categories //
         List<Category> GetCategoriesById(Guid providerId);
         void CreateCategory(Category category);

@@ -9,18 +9,6 @@ namespace legendary_garbanzo.Data
     {
         public DataContext(DbContextOptions<DataContext> opt) : base(opt)
         {
-
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            /* Configure category multi-key requirement as Composite primary
-             keys can only be set using 'HasKey' in 'OnModelCreating' */
-            modelBuilder.Entity<Category>()
-                .HasKey(c => new {c.ProviderId, c.CategoryNumber});
-            modelBuilder.Entity<Category>()
-                .Property(c => c.CategoryNumber)
-                .ValueGeneratedOnAdd();
         }
 
         public DbSet<User> Users { get; set; }
@@ -33,5 +21,16 @@ namespace legendary_garbanzo.Data
         public DbSet<Notification> Notifications { get; set; }
 
         public DbSet<PrivateMessage> PrivateMessages { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            /* Configure category multi-key requirement as Composite primary
+             keys can only be set using 'HasKey' in 'OnModelCreating' */
+            modelBuilder.Entity<Category>()
+                .HasKey(c => new {c.ProviderId, c.CategoryNumber});
+            modelBuilder.Entity<Category>()
+                .Property(c => c.CategoryNumber)
+                .ValueGeneratedOnAdd();
+        }
     }
 }

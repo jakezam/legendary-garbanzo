@@ -13,7 +13,6 @@ namespace legendary_garbanzo.Profiles
                 .ForMember(j => j.JobAccepted,
                     opt => opt.MapFrom(src => false));
             CreateMap<JobUpdate, Job>();
-
         }
     }
 }

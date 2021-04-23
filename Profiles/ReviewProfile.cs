@@ -14,7 +14,6 @@ namespace legendary_garbanzo.Profiles
                 .ForMember(r => r.CreatedDate,
                     opt => opt.MapFrom(src => DateTime.Now));
             CreateMap<ReviewUpdate, Review>();
-
         }
     }
 }

@@ -6,8 +6,6 @@ using legendary_garbanzo.DTOs;
 using legendary_garbanzo.Models;
 using Microsoft.AspNetCore.Mvc;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
-
 namespace legendary_garbanzo.Controllers
 {
     [Route("api/[controller]")]
@@ -48,6 +46,9 @@ namespace legendary_garbanzo.Controllers
         }
 
         // POST api/users
+        /// <remarks>
+        ///     A created user will get an auto generated created date
+        /// </remarks>
         [HttpPost]
         public ActionResult<UserCreate> CreateUser(UserCreate userCreate)
         {

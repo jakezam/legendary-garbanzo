@@ -6,7 +6,6 @@ using legendary_garbanzo.DTOs;
 using legendary_garbanzo.Models;
 using Microsoft.AspNetCore.Mvc;
 
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace legendary_garbanzo.Controllers
 {
     [Route("api/[controller]")]

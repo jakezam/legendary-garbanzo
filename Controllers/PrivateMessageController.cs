@@ -5,8 +5,6 @@ using legendary_garbanzo.Data;
 using legendary_garbanzo.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
-
 namespace legendary_garbanzo.Controllers
 {
     [Route("api/[controller]")]

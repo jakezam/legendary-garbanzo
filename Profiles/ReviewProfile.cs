@@ -9,6 +9,7 @@ namespace legendary_garbanzo.Profiles
     {
         public ReviewProfile()
         {
+            // We use automapper, this can map access types to models //
             CreateMap<Review, ReviewRead>();
             CreateMap<ReviewCreate, Review>()
                 .ForMember(r => r.CreatedDate,

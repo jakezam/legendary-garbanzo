@@ -8,6 +8,7 @@ namespace legendary_garbanzo.Profiles
     {
         public JobProfile()
         {
+            // We use automapper, this can map access types to models //
             CreateMap<Job, JobRead>();
             CreateMap<JobCreate, Job>()
                 .ForMember(j => j.JobAccepted,

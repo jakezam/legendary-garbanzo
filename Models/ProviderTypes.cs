@@ -1,10 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
-
 namespace legendary_garbanzo.Models
 {
+    // These are the generalized categories that providers can pick when creating an account
     public class ProviderTypes
     {
         [Key] public Guid TypeId { get; set; }

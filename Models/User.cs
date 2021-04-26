@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
-
 namespace legendary_garbanzo.Models
 {
     public class User

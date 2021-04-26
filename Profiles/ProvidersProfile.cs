@@ -3,14 +3,13 @@ using AutoMapper;
 using legendary_garbanzo.DTOs;
 using legendary_garbanzo.Models;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
-
 namespace legendary_garbanzo.Profiles
 {
     public class ProvidersProfile : Profile
     {
         public ProvidersProfile()
         {
+            // We use automapper, this can map access types to models //
             CreateMap<Provider, ProviderRead>();
             CreateMap<ProviderCreate, Provider>()
                 .ForMember(p => p.Rating,

@@ -1,6 +1,5 @@
 using System;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
 namespace legendary_garbanzo.DTOs
 {
     public class JobRead

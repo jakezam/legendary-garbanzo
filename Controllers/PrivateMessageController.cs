@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using legendary_garbanzo.Data;
 using legendary_garbanzo.DTOs;
+using legendary_garbanzo.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace legendary_garbanzo.Controllers
@@ -32,6 +33,22 @@ namespace legendary_garbanzo.Controllers
         public ICollection<PrivateMessageRead> GetUserSent(Guid userId)
         {
             return (ICollection<PrivateMessageRead>) _data.GetUserSent(userId);
+        }
+
+        // Post api/users/{id}/Outbox
+        [HttpPost]
+        public ActionResult<PrivateMessageCreate> PostMessage(PrivateMessageCreate message)
+        {
+            PrivateMessage m = new PrivateMessage
+            {
+                From = message.From,
+                To = message.To,
+                Message = message.Message,
+                Subject = message.Subject
+            };
+            _data.SendMessage(m);
+            _data.SaveChanges();
+            return CreatedAtRoute(nameof(m),m);
         }
 
         // DELETE api/reviews

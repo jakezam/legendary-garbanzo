@@ -78,7 +78,7 @@ namespace legendary_garbanzo.Data
 
         public ICollection<PrivateMessage> GetUserSent(Guid userId)
         {
-            return _context.Users.Include(User => User.Inbox).FirstOrDefault(user => user.UserId == userId).Sent;
+            return _context.PrivateMessages.Where(m => m.From == userId).ToList();
         }
 
         public void UpdateUser(User user)

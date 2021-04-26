@@ -15,6 +15,9 @@ namespace legendary_garbanzo.DTOs
 
         [Required]
         public string Day { get; set; }
+        
+        [Required]
+        public string ProviderCategory { get; set; }
 
         [Required]
         public string Message { get; set; }

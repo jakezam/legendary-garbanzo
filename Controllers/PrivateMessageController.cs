@@ -23,16 +23,19 @@ namespace legendary_garbanzo.Controllers
 
         // GET api/PrivateMessage/{id}/Inbox
         [HttpGet("{userId}/inbox", Name = nameof(GetUserInbox))]
-        public ICollection<PrivateMessageRead> GetUserInbox(Guid userId)
+        public IEnumerable<PrivateMessageRead> GetUserInbox(Guid userId)
         {
-            return (ICollection<PrivateMessageRead>) _data.GetUserInbox(userId);
+            
+            return GetReturnableMessages(_data.GetUserInbox(userId));
+            
+
         }
 
         // GET api/PrivateMessage/{id}/Outbox
         [HttpGet("{userId}/outbox", Name = nameof(GetUserSent))]
-        public ICollection<PrivateMessageRead> GetUserSent(Guid userId)
+        public IEnumerable<PrivateMessageRead> GetUserSent(Guid userId)
         {
-            return (ICollection<PrivateMessageRead>) _data.GetUserSent(userId);
+            return GetReturnableMessages(_data.GetUserSent(userId));
         }
 
         // Post api/PrivateMessage
@@ -60,6 +63,41 @@ namespace legendary_garbanzo.Controllers
             _data.DeletePrivateMessage(message);
             _data.SaveChanges();
             return NoContent();
+        }
+
+        // Return list of messages with names
+        private List<PrivateMessageRead> GetReturnableMessages(ICollection<PrivateMessage> msgs)
+        {
+            List<PrivateMessageRead> messagesToReturn = new List<PrivateMessageRead>();
+            foreach (var message in msgs)
+            {
+                var fromName = "";
+                var toName = ""; 
+                var from = _data.GetUserById(message.From);
+                var to = _data.GetUserById(message.To);
+                if (from != null)
+                {
+                    fromName = from.FirstName + " " + from.LastName;
+                }
+
+                if (to != null)
+                {
+                    toName = to.FirstName + " " + to.LastName;
+                }
+
+                PrivateMessageRead msg = new PrivateMessageRead
+                {
+                    MessageId = message.PrivateMessageId,
+                    Message = message.Message,
+                    Subject = message.Subject,
+                    From = message.From,
+                    To = message.To,
+                    FromName = fromName,
+                    ToName = toName
+                };
+                messagesToReturn.Add(msg);
+            }
+            return messagesToReturn;
         }
     }
 }

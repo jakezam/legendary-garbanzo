@@ -21,21 +21,21 @@ namespace legendary_garbanzo.Controllers
             _mapper = mapper;
         }
 
-        // GET api/users/{id}/Inbox
+        // GET api/PrivateMessage/{id}/Inbox
         [HttpGet("{userId}/inbox", Name = nameof(GetUserInbox))]
         public ICollection<PrivateMessageRead> GetUserInbox(Guid userId)
         {
             return (ICollection<PrivateMessageRead>) _data.GetUserInbox(userId);
         }
 
-        // GET api/users/{id}/Outbox
+        // GET api/PrivateMessage/{id}/Outbox
         [HttpGet("{userId}/outbox", Name = nameof(GetUserSent))]
         public ICollection<PrivateMessageRead> GetUserSent(Guid userId)
         {
             return (ICollection<PrivateMessageRead>) _data.GetUserSent(userId);
         }
 
-        // Post api/users/{id}/Outbox
+        // Post api/PrivateMessage
         [HttpPost]
         public ActionResult<PrivateMessageCreate> PostMessage(PrivateMessageCreate message)
         {
@@ -51,9 +51,9 @@ namespace legendary_garbanzo.Controllers
             return CreatedAtRoute(nameof(m),m);
         }
 
-        // DELETE api/reviews
+        // DELETE api/PrivateMessage/{messageId}
         [HttpDelete("{messageId}")]
-        public IActionResult CreateReview(Guid messageId)
+        public IActionResult DeleteMessage(Guid messageId)
         {
             var message = _data.GetPrivateMessage(messageId);
             if (message == null) return NotFound();

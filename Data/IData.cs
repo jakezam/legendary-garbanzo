@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using legendary_garbanzo.Models;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
-
+/* Data return interface */
 namespace legendary_garbanzo.Data
 {
     public interface IData

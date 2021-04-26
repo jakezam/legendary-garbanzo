@@ -4,8 +4,7 @@ using System.Linq;
 using legendary_garbanzo.Models;
 using Microsoft.EntityFrameworkCore;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
-
+/* These functions are used to get actual data return from a database */
 namespace legendary_garbanzo.Data
 {
     public class SqlData : IData

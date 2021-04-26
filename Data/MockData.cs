@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using legendary_garbanzo.Models;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
+/* These functions are used to mock data return without the need for a database */
 namespace legendary_garbanzo.Data
 {
     public class MockData : IData

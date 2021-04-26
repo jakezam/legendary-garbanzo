@@ -1,8 +1,6 @@
 ﻿using legendary_garbanzo.Models;
 using Microsoft.EntityFrameworkCore;
 
-#pragma warning disable 1591 /*XML Doc String Warning*/
-
 namespace legendary_garbanzo.Data
 {
     public class DataContext : DbContext
@@ -11,17 +9,17 @@ namespace legendary_garbanzo.Data
         {
         }
 
+        // Create tables for the database
         public DbSet<User> Users { get; set; }
         public DbSet<Provider> Providers { get; set; }
         public DbSet<ProviderTypes> ProviderTypes { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Job> Jobs { get; set; }
-
         public DbSet<Notification> Notifications { get; set; }
-
         public DbSet<PrivateMessage> PrivateMessages { get; set; }
 
+        // Special settings, our category will have a custom key set and on add CategoryNumber will be auto generated
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             /* Configure category multi-key requirement as Composite primary

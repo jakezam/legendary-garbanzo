@@ -21,6 +21,8 @@
    - Categories
    - Reviews
    - Jobs
+
+   The frontend codebase of Inployd is available [here](https://github.com/jakezam/crabapple-conglomerate).
    <br /> <br />
      
 <hr />
